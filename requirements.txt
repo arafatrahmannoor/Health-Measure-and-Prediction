@@ -1,0 +1,7 @@
+Django>=6.0
+djangorestframework
+joblib
+pandas
+numpy
+scikit-learn
+imbalanced-learn
