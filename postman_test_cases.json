@@ -1,0 +1,193 @@
+{
+  "info": {
+    "name": "Health Prediction API Tests",
+    "description": "Test cases for health anomaly prediction endpoint",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Normal Health - Valid Input",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Temp_C\": 37.0,\n  \"SpO2\": 99,\n  \"BPM\": 70\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/profile",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["profile"]
+        }
+      }
+    },
+    {
+      "name": "2. Abnormal - High Temperature",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Temp_C\": 39.5,\n  \"SpO2\": 88,\n  \"BPM\": 95\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/profile",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["profile"]
+        }
+      }
+    },
+    {
+      "name": "3. Abnormal - Low SpO2",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Temp_C\": 38.0,\n  \"SpO2\": 85,\n  \"BPM\": 100\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/profile",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["profile"]
+        }
+      }
+    },
+    {
+      "name": "4. Abnormal - High BPM",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Temp_C\": 35.0,\n  \"SpO2\": 92,\n  \"BPM\": 115\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/profile",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["profile"]
+        }
+      }
+    },
+    {
+      "name": "5. Error - Missing Field (SpO2)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Temp_C\": 37.0,\n  \"BPM\": 70\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/profile",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["profile"]
+        }
+      }
+    },
+    {
+      "name": "6. Error - Invalid Data Type",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Temp_C\": \"invalid\",\n  \"SpO2\": 99,\n  \"BPM\": 70\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/profile",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["profile"]
+        }
+      }
+    },
+    {
+      "name": "7. Normal - Borderline Values",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Temp_C\": 36.5,\n  \"SpO2\": 95,\n  \"BPM\": 75\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/profile",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["profile"]
+        }
+      }
+    },
+    {
+      "name": "8. Abnormal - Multiple Critical Values",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Temp_C\": 40.0,\n  \"SpO2\": 82,\n  \"BPM\": 120\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/profile",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["profile"]
+        }
+      }
+    }
+  ]
+}
