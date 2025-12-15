@@ -7,6 +7,13 @@ import os
 from pathlib import Path
 
 class ProfileView(APIView):
+    def dispatch(self, *args, **kwargs):
+        response = super().dispatch(*args, **kwargs)
+        # Add CORS headers manually
+        response["Access-Control-Allow-Origin"] = "*"
+        response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+        response["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept"
+        return response
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         # Load model once during initialization
@@ -18,6 +25,16 @@ class ProfileView(APIView):
             self.threshold = 0.45  # Same threshold from notebook
         else:
             self.model = None
+
+    def options(self, request, *args, **kwargs):
+        """
+        Handle preflight OPTIONS request for CORS
+        """
+        response = Response()
+        response["Access-Control-Allow-Origin"] = "*"
+        response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+        response["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept"
+        return response
 
     def post(self, request):
         """
